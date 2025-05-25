@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
@@ -46,24 +47,29 @@ class CategoriaController extends Controller
     }
 
     
-     //Actualizar una categoría.
-    public function update(CategoriaRequest $request, Categoria $categoria)
-    {
-        $validated = $request->validated();
+    public function update(CategoriaRequest $request, $id)
+{
+    $categoria = Categoria::findOrFail($id); // Buscar la categoría existente
 
-        if ($request->hasFile('imagen')) {
-            if ($categoria->imagen) {
-                Storage::disk('public')->delete($categoria->imagen);
-            }
+    $validated = $request->validated();
 
-            $validated['imagen'] = $request->file('imagen')->store('categorias', 'public');
-        } else {
-            $validated['imagen'] = $categoria->imagen;
+    // Si hay una nueva imagen, eliminar la anterior y guardar la nueva
+    if ($request->hasFile('imagen')) {
+        if ($categoria->imagen) {
+            Storage::disk('public')->delete($categoria->imagen);
         }
-
-        $categoria->update($validated);
-        return redirect()->route('categoria.index')->with('mensaje', 'Categoría actualizada exitosamente.');
+        $validated['imagen'] = $request->file('imagen')->store('categorias', 'public');
     }
+
+    // 🔥 Actualizar TODOS los datos, incluyendo la imagen si existe
+    $categoria->fill($validated);
+    $categoria->save();
+
+    return redirect()->route('categoria.index')->with('mensaje', 'Categoría actualizada exitosamente.');
+}
+
+
+
 
 
     // Eliminar una categoría.

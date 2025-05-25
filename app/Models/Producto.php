@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    protected $table = 'productos'; // Nombre exacto de la tabla en la BD
+    protected $table = 'productos';
 
     protected $fillable = [
         'nombre',
