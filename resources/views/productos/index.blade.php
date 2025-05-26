@@ -4,12 +4,14 @@
 <div class="container mx-auto p-6" x-data="{ modalAgregarAbierto: false }">
     <h1 class="text-2xl font-bold mb-4">Lista de Productos</h1>
 
-    <!-- 🔥 Botón para abrir el modal de agregar producto -->
+    @auth
+    <!-- Agregar producto -->
     <div class="mb-4 flex justify-start">
         <button @click="modalAgregarAbierto = true" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
             ➕ Agregar Producto
         </button>
     </div>
+    @endauth
 
     <!-- Modal de agregar producto -->
     @include('productos.create-modal')
@@ -44,8 +46,10 @@
                 <th class="border border-gray-300 px-4 py-2">Cantidad</th>
                 <th class="border border-gray-300 px-4 py-2">Categoría</th>
                 <th class="border border-gray-300 px-4 py-2">Imagen</th>
+                @auth
                 <th class="border border-gray-300 px-4 py-2">Editar</th>
                 <th class="border border-gray-300 px-4 py-2">Eliminar</th>
+                @endauth
             </tr>
         </thead>
         <tbody>
@@ -63,7 +67,8 @@
                             Sin imagen
                         @endif
                     </td>
-                    <td class="border border-gray-300 px-4 py-2" x-data="{ abierto: false }">
+                    @auth
+                    <td class="border border-gray-300 px-4 py-2">
                         @include('productos.edit', ['producto' => $producto])
                     </td>
                     <td class="border border-gray-300 px-4 py-2">
@@ -73,6 +78,7 @@
                             <button type="submit" class="bg-red-600 hover:bg-red-700 text-black font-bold py-2 px-4 rounded-lg shadow-md transition">Eliminar</button>
                         </form>
                     </td>
+                    @endauth
                 </tr>
             @endforeach
         </tbody>
@@ -83,5 +89,5 @@
         {{ $productos->appends(['search' => request()->query('search')])->links() }}
     </div>
 </div>
-
 @endsection
+

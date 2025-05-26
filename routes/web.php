@@ -1,13 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoriaController;
-    
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-require __DIR__.'/usuarios.php';
-require __DIR__.'/productos.php';
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+require __DIR__.'/profile.php';
+require __DIR__.'/auth.php';
 require __DIR__.'/categorias.php';
+require __DIR__.'/productos.php';

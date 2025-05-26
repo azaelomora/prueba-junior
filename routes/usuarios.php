@@ -3,8 +3,6 @@
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
-
-
 Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.index');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
