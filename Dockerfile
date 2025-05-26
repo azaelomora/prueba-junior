@@ -1,4 +1,4 @@
-# Usa una imagen oficial de PHP con soporte para Laravel y Composer
+# Usa una imagen oficial de PHP
 FROM php:8.1-fpm
 
 # Instala extensiones necesarias para Laravel
@@ -10,18 +10,18 @@ RUN apt-get update && apt-get install -y \
 # Instala Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia los archivos del proyecto al contenedor
+# Configura el directorio de trabajo
 WORKDIR /var/www/html
 COPY . .
 
-# Instala dependencias de Laravel
-RUN composer install --no-dev --optimize-autoloader
+# 🔹 Agrega el comando aquí para instalar las dependencias de Laravel
+RUN composer install --ignore-platform-reqs --no-dev --optimize-autoloader
 
-# Configura permisos adecuados para almacenamiento y caché
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Configura permisos adecuados
+RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expone el puerto 8000 para acceder a la aplicación
+# Expone el puerto 8000
 EXPOSE 8000
 
-# Comando de inicio del servidor Laravel
+# Comando para iniciar Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
