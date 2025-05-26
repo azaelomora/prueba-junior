@@ -24,5 +24,7 @@ RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
 EXPOSE 8000
 
 # Comando para iniciar Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=$PORT"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port", "8000"]
+
+
 
