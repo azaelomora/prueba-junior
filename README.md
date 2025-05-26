@@ -1,61 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛍 Prueba Técnica - Desarrollador Junior
+¡Bienvenido a Prueba Técnica en Laravel! Este proyecto es un sistema de gestión de productos y categorías, desarrollado con **Laravel**, **TailwindCSS**, **Alpine.js**, y **MySQL**.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📌 Requisitos del sistema
+Antes de instalar el proyecto, asegúrate de tener los siguientes requisitos:
 
-## About Laravel
+- **PHP 8.1 o superior**
+- **Composer** (gestor de dependencias PHP)
+- **MySQL 5.7+ o MariaDB** (base de datos)
+- **Node.js y NPM** (para gestionar los assets con Vite)
+- **Git** (para clonar el repositorio)
+- **Servidor Apache o Nginx** (para ejecutar Laravel)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Instrucciones de instalación
+Sigue estos pasos para instalar y ejecutar el proyecto en tu entorno local:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1️⃣ Clonar el repositorio
+```sh
+git clone https://github.com/azaelomora/prueba-junior.git
+cd prueba-junior
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2️⃣ Configurar el entorno
+```sh
+cp .env.example .env
+php artisan key:generate
+```
 
-## Learning Laravel
+### 3️⃣ Configurar la base de datos
+Asegúrate de que tienes MySQL corriendo en el puerto 3307. Luego, en .env, modifica estos valores:
+```ini
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3307
+DB_DATABASE=tienda
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 4️⃣ Instalar dependencias
+Instala las dependencias de Laravel y los paquetes de frontend:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```sh
+composer install
+npm install
+```
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 5️⃣ Ejecutar las migraciones
+Crea las tablas en la base de datos con:
+```sh
+php artisan migrate
+```
 
-### Premium Partners
+6️⃣ Ejecutar el servidor
+```sh
+php artisan serve
+```
+Accede a http://http://127.0.0.1:8000/ y disfruta tu aplicación.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 💡 Decisiones técnicas relevantes
+Este proyecto utiliza las siguientes tecnologías:
 
-## Contributing
+- **Laravel Breeze** para autenticación de usuarios.
+- **TailwindCSS y Alpine.js** para una interfaz ágil y responsive.
+- **Base de datos MySQL**, optimizada con SESSION_DRIVER=database.
+- **Paginación en tablas** para optimizar la carga de productos y categorías.
+- **SweetAlert2** para notificaciones interactivas.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## 📸 Capturas de pantalla
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### ✅ Pantalla principal
+![Vista del Dashboard](docs/images/dashboard-view.png)
 
-## Security Vulnerabilities
+### ✅ Lista de productos y categorías
+![Vista de productos](docs/images/productos-list.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Vista de categorias](docs/images/categorias-list.png)
 
-## License
+### ✅ Registro e iniciar sesión
+![Vista de registro](docs/images/register.png)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![Vista de Login](docs/images/log-in.png)
+
+
+### ✅ Edición de perfil
+![Vista del Dashboard](docs/images/perfil-view.png)
+
+
+
+## 🤝 Contribuciones
+Si deseas contribuir, envía un Pull Request o abre una Issue.
+
